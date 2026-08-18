@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      attractions: {
+        Row: {
+          category: Database["public"]["Enums"]["attraction_category"]
+          created_at: string
+          description: string
+          featured: boolean
+          guide_required: Database["public"]["Enums"]["guide_requirement"]
+          id: string
+          images: string[]
+          latitude: number
+          longitude: number
+          municipality: string
+          name: string
+          region: string
+          slug: string
+          trail_level: Database["public"]["Enums"]["trail_level"]
+          updated_at: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["attraction_category"]
+          created_at?: string
+          description: string
+          featured?: boolean
+          guide_required?: Database["public"]["Enums"]["guide_requirement"]
+          id?: string
+          images?: string[]
+          latitude: number
+          longitude: number
+          municipality: string
+          name: string
+          region: string
+          slug: string
+          trail_level?: Database["public"]["Enums"]["trail_level"]
+          updated_at?: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["attraction_category"]
+          created_at?: string
+          description?: string
+          featured?: boolean
+          guide_required?: Database["public"]["Enums"]["guide_requirement"]
+          id?: string
+          images?: string[]
+          latitude?: number
+          longitude?: number
+          municipality?: string
+          name?: string
+          region?: string
+          slug?: string
+          trail_level?: Database["public"]["Enums"]["trail_level"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bookings: {
         Row: {
           check_in: string
@@ -67,7 +121,17 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      attraction_category:
+        | "beach"
+        | "nature"
+        | "trail"
+        | "history"
+        | "culture"
+        | "natural_formation"
+        | "heritage"
       booking_status: "pending" | "confirmed" | "cancelled"
+      guide_requirement: "not_required" | "recommended" | "required"
+      trail_level: "none" | "easy" | "moderate" | "difficult"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -195,7 +259,18 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      attraction_category: [
+        "beach",
+        "nature",
+        "trail",
+        "history",
+        "culture",
+        "natural_formation",
+        "heritage",
+      ],
       booking_status: ["pending", "confirmed", "cancelled"],
+      guide_requirement: ["not_required", "recommended", "required"],
+      trail_level: ["none", "easy", "moderate", "difficult"],
     },
   },
 } as const
