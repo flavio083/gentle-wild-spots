@@ -159,21 +159,21 @@ export const mockBookings: Booking[] = [
   },
 ];
 
-export const getBookingsByLocation = (locationId: string) => 
-  mockBookings.filter(booking => booking.locationId === locationId);
+export const getBookingsByLocation = (bookings: Booking[], locationId: string) =>
+  bookings.filter(booking => booking.locationId === locationId);
 
-export const getUpcomingBookings = () => {
+export const getUpcomingBookings = (bookings: Booking[]) => {
   const today = new Date();
-  return mockBookings.filter(booking => 
+  return bookings.filter(booking =>
     booking.checkIn >= today && booking.status !== 'cancelled'
   );
 };
 
-export const getBookingStats = () => {
+export const getBookingStats = (bookings: Booking[]) => {
   const today = new Date();
-  const confirmed = mockBookings.filter(b => b.status === 'confirmed').length;
-  const pending = mockBookings.filter(b => b.status === 'pending').length;
-  const upcoming = mockBookings.filter(b => b.checkIn >= today && b.status !== 'cancelled').length;
-  
-  return { total: mockBookings.length, confirmed, pending, upcoming };
+  const confirmed = bookings.filter(b => b.status === 'confirmed').length;
+  const pending = bookings.filter(b => b.status === 'pending').length;
+  const upcoming = bookings.filter(b => b.checkIn >= today && b.status !== 'cancelled').length;
+
+  return { total: bookings.length, confirmed, pending, upcoming };
 };
