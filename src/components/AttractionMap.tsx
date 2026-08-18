@@ -65,7 +65,7 @@ export const AttractionMap = ({
     }
 
     if (!center && attractions.length > 0) {
-      const group = new L.featureGroup(
+      const group = L.featureGroup(
         attractions.map((a) => L.marker([a.latitude, a.longitude]))
       );
       map.fitBounds(group.getBounds().pad(0.1));
