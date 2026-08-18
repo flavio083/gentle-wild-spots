@@ -1,23 +1,24 @@
-import { Tent, Instagram, Facebook, Twitter, Mail } from "lucide-react";
+import { Palmtree, Instagram, Facebook, Twitter, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+
 const Footer = () => {
-  return <footer className="bg-foreground text-background py-20 lg:py-24">
+  return (
+    <footer className="bg-foreground text-background py-20 lg:py-24">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="flex flex-col gap-10 lg:gap-12">
-          {/* Brand Row */}
+        <div className="grid md:grid-cols-3 gap-10 lg:gap-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Tent className="h-4 w-4" />
-              <span className="text-sm font-normal tracking-wide">Wild Haven</span>
+              <Palmtree className="h-4 w-4" />
+              <span className="text-sm font-normal tracking-wide">Descubra Paraíba</span>
             </div>
             <p className="text-background/70 text-xs font-light leading-relaxed max-w-xs">
-              Creating meaningful connections with nature through sustainable off-grid experiences.
+              Descubra praias, trilhas, formações naturais e patrimônios históricos
+              da Paraíba em um só lugar.
             </p>
           </div>
 
-          {/* Pages Row - Two Columns on Mobile */}
           <div>
-            <h4 className="text-sm font-medium mb-4">Pages</h4>
+            <h4 className="text-sm font-medium mb-4">Páginas</h4>
             <ul className="grid grid-cols-2 gap-x-8 gap-y-3">
               <li>
                 <Link to="/" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
@@ -25,47 +26,41 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/locations" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
-                  Locations
+                <Link to="/descobrir" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
+                  Descobrir
                 </Link>
               </li>
               <li>
                 <Link to="/about" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
-                  About
+                  Sobre
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
-                  Contact
+                  Contato
                 </Link>
               </li>
               <li>
-                <a href="/#booking" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
-                  Book Now
-                </a>
-              </li>
-              <li>
                 <Link to="/admin" className="text-background/70 hover:text-background smooth-hover text-xs font-light">
-                  Admin Panel
+                  Painel Admin
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact Row */}
           <div>
-            <h4 className="text-sm font-medium mb-4">Contact Us</h4>
+            <h4 className="text-sm font-medium mb-4">Contato</h4>
             <div className="flex flex-col gap-2 mb-8">
-              <a href="mailto:hello@wildhaven.com" className="text-background/70 hover:text-background smooth-hover text-xs font-light flex items-center gap-2">
+              <a href="mailto:contato@descubraparaiba.com" className="text-background/70 hover:text-background smooth-hover text-xs font-light flex items-center gap-2">
                 <Mail className="h-3 w-3" />
-                hello@wildhaven.com
+                contato@descubraparaiba.com
               </a>
               <p className="text-background/70 text-xs font-light">
-                Mon - Fri: 9am - 5pm
+                Seg - Sex: 9h - 18h
               </p>
             </div>
 
-            <h4 className="text-sm font-medium mb-4">Follow Us</h4>
+            <h4 className="text-sm font-medium mb-4">Redes</h4>
             <div className="flex items-center gap-4">
               <a href="#" className="text-background/70 hover:text-background smooth-hover">
                 <Instagram className="h-4 w-4" />
@@ -81,9 +76,11 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-background/20 pt-8 mt-12 text-center text-background/50 text-xs font-light">
-          <p>&copy; 2026 Wild Haven. All rights reserved.</p>
+          <p>&copy; 2026 Descubra Paraíba. Todos os direitos reservados.</p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
