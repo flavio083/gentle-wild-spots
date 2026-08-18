@@ -37,6 +37,7 @@ const Booking = () => {
   // Form step state
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
   
   // Step 1 fields - changed to date range
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -66,18 +67,43 @@ const Booking = () => {
     setStep(1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!name || !phone || !email || !postcode) {
       toast.error("Please fill in all contact details");
       return;
     }
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address");
       return;
     }
-    
+
+    if (!dateRange?.from || !dateRange?.to || !location || !guests) {
+      toast.error("Booking details are incomplete");
+      return;
+    }
+
+    setSubmitting(true);
+
+    const { error } = await supabase.from("bookings").insert({
+      location_id: location,
+      guest_name: name,
+      email,
+      phone,
+      postcode,
+      check_in: format(dateRange.from, "yyyy-MM-dd"),
+      check_out: format(dateRange.to, "yyyy-MM-dd"),
+      guests: parseInt(guests, 10),
+    });
+
+    if (error) {
+      toast.error("Failed to submit booking. Please try again.");
+      setSubmitting(false);
+      return;
+    }
+
+    setSubmitting(false);
     setDirection(1);
     setStep(3);
   };
@@ -315,8 +341,9 @@ const Booking = () => {
                         size="default"
                         className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md smooth-hover text-[11px] uppercase tracking-wider font-normal"
                         onClick={handleSubmit}
+                        disabled={submitting}
                       >
-                        Submit Booking
+                        {submitting ? "Submitting..." : "Submit Booking"}
                       </Button>
                     </div>
                   </div>
