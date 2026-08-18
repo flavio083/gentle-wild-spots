@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { Calendar, Users, DollarSign, MapPin, Mail, Phone, ArrowLeft, LogOut, Eye } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,9 +18,10 @@ import {
 } from "@/components/ui/table";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { mockBookings, getBookingStats } from "@/data/bookings";
+import { mockBookings, getBookingStats, Booking } from "@/data/bookings";
 import { locations, getLocationById } from "@/data/locations";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -27,13 +29,49 @@ const Admin = () => {
   const isDemo = searchParams.get("demo") === "true";
   const { user, loading, signOut } = useAuth();
   const [selectedLocation, setSelectedLocation] = useState("all");
-  const stats = getBookingStats();
+  const [bookings, setBookings] = useState<Booking[]>(mockBookings);
+  const [bookingsLoading, setBookingsLoading] = useState(false);
+  const stats = getBookingStats(bookings);
 
   useEffect(() => {
     if (!loading && !user && !isDemo) {
       navigate("/auth");
     }
   }, [loading, user, navigate, isDemo]);
+
+  useEffect(() => {
+    if (isDemo || loading || !user) return;
+
+    const fetchBookings = async () => {
+      setBookingsLoading(true);
+      const { data, error } = await supabase
+        .from("bookings")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        toast.error("Failed to load bookings");
+      } else if (data) {
+        setBookings(
+          data.map((b) => ({
+            id: b.id,
+            locationId: b.location_id,
+            guestName: b.guest_name,
+            email: b.email,
+            phone: b.phone,
+            checkIn: new Date(b.check_in),
+            checkOut: new Date(b.check_out),
+            guests: b.guests,
+            status: b.status,
+            createdAt: new Date(b.created_at),
+          }))
+        );
+      }
+      setBookingsLoading(false);
+    };
+
+    fetchBookings();
+  }, [isDemo, user, loading]);
 
   if (loading && !isDemo) {
     return (
@@ -43,9 +81,9 @@ const Admin = () => {
     );
   }
 
-  const filteredBookings = selectedLocation === "all" 
-    ? mockBookings 
-    : mockBookings.filter(b => b.locationId === selectedLocation);
+  const filteredBookings = selectedLocation === "all"
+    ? bookings
+    : bookings.filter(b => b.locationId === selectedLocation);
 
   const getStatusColor = (status: string) => {
     switch (status) {
