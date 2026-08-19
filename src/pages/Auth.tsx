@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Tent, ArrowLeft } from "lucide-react";
+import { Palmtree, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,8 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  email: z.string().email("Digite um e-mail válido"),
+  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 });
 
 const Auth = () => {
@@ -46,7 +46,7 @@ const Auth = () => {
     const validation = loginSchema.safeParse({ email, password });
     if (!validation.success) {
       toast({
-        title: "Validation Error",
+        title: "Erro de validação",
         description: validation.error.errors[0].message,
         variant: "destructive",
       });
@@ -60,9 +60,9 @@ const Auth = () => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
           toast({
-            title: "Login Failed",
+            title: "Falha no login",
             description: error.message === "Invalid login credentials" 
-              ? "Invalid email or password. Please try again." 
+              ? "E-mail ou senha inválidos. Tente novamente." 
               : error.message,
             variant: "destructive",
           });
@@ -78,28 +78,28 @@ const Auth = () => {
         if (error) {
           if (error.message.includes("already registered")) {
             toast({
-              title: "Account Exists",
-              description: "This email is already registered. Please log in instead.",
+              title: "Conta existente",
+              description: "Este e-mail já está registrado. Faça login.",
               variant: "destructive",
             });
           } else {
             toast({
-              title: "Sign Up Failed",
+              title: "Falha no cadastro",
               description: error.message,
               variant: "destructive",
             });
           }
         } else {
           toast({
-            title: "Check Your Email",
-            description: "We've sent you a confirmation link. Please verify your email to continue.",
+            title: "Verifique seu e-mail",
+            description: "Enviamos um link de confirmação. Verifique sua caixa de entrada.",
           });
         }
       }
     } catch {
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
+        title: "Erro",
+        description: "Algo deu errado. Tente novamente.",
         variant: "destructive",
       });
     } finally {
@@ -117,32 +117,32 @@ const Auth = () => {
       >
         <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <Tent className="h-5 w-5 text-primary" />
+            <Palmtree className="h-5 w-5 text-primary" />
             <span className="text-sm font-normal tracking-wide text-background">
-              Wild Haven
+              Descubra Paraíba
             </span>
           </div>
           <h1 className="text-2xl font-light text-background mb-2 tracking-tight">
-            {isLogin ? "Admin Login" : "Create Account"}
+            {isLogin ? "Login Admin" : "Criar Conta"}
           </h1>
           <p className="text-xs text-background/60 font-light">
             {isLogin
-              ? "Sign in to manage your properties"
-              : "Register for admin access"}
+              ? "Entre para gerenciar os pontos turísticos"
+              : "Cadastre-se para acesso administrativo"}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
             <Label htmlFor="email" className="text-[11px] uppercase tracking-wider font-normal text-background/70">
-              Email
+              E-mail
             </Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@wildhaven.com"
+              placeholder="admin@descubraparaiba.com"
               className="bg-background/10 border-background/20 text-background placeholder:text-background/30 focus-visible:ring-primary"
               required
             />
@@ -150,7 +150,7 @@ const Auth = () => {
 
           <div className="space-y-2">
             <Label htmlFor="password" className="text-[11px] uppercase tracking-wider font-normal text-background/70">
-              Password
+              Senha
             </Label>
             <Input
               id="password"
@@ -168,7 +168,7 @@ const Auth = () => {
             disabled={loading}
             className="w-full rounded-full text-[11px] uppercase tracking-wider font-normal"
           >
-            {loading ? "Please wait..." : isLogin ? "Sign In" : "Create Account"}
+            {loading ? "Aguarde..." : isLogin ? "Entrar" : "Criar Conta"}
           </Button>
         </form>
 
@@ -177,7 +177,7 @@ const Auth = () => {
             onClick={() => setIsLogin(!isLogin)}
             className="text-xs text-background/50 hover:text-background/80 font-light transition-colors"
           >
-            {isLogin ? "Need an account? Sign up" : "Already have an account? Sign in"}
+            {isLogin ? "Precisa de uma conta? Cadastre-se" : "Já tem uma conta? Entre"}
           </button>
         </div>
 
@@ -187,14 +187,14 @@ const Auth = () => {
             onClick={() => navigate("/admin?demo=true")}
             className="w-full rounded-full text-[11px] uppercase tracking-wider font-normal"
           >
-            Try Demo Mode
+            Modo Demonstração
           </Button>
           <button
             onClick={() => navigate("/")}
             className="text-xs text-background/40 hover:text-background/60 font-light transition-colors flex items-center gap-1"
           >
             <ArrowLeft className="h-3 w-3" />
-            Back to site
+            Voltar ao site
           </button>
         </div>
       </motion.div>

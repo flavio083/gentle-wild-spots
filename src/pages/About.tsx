@@ -1,39 +1,39 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Leaf, Heart, Compass, Mountain, Users, TreePine } from "lucide-react";
+import { MapPin, Heart, Compass, Mountain, Users, Camera } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import bannerImage from "@/assets/detail-lake-2.jpg";
 
 const values = [
   {
-    icon: Leaf,
-    title: "Sustainability",
-    description: "We tread lightly on the earth, ensuring our retreats enhance rather than harm the natural environment."
+    icon: MapPin,
+    title: "Lugares Reais",
+    description: "Cada ponto turístico é verificado e apresentado com informações precisas sobre localização, acesso e infraestrutura."
   },
   {
     icon: Heart,
-    title: "Connection",
-    description: "Fostering deep bonds between people and the natural world through meaningful wilderness experiences."
+    title: "Paixão Local",
+    description: "Valorizamos a cultura paraibana e destacamos experiências que conectam visitantes às tradições do estado."
   },
   {
     icon: Compass,
-    title: "Simplicity",
-    description: "Stripping away modern complexity to rediscover the joy found in life's essential elements."
+    title: "Descoberta",
+    description: "Incentivamos a exploração consciente de praias, trilhas, formações naturais e patrimônios históricos."
   },
   {
     icon: Mountain,
-    title: "Authenticity",
-    description: "Providing genuine wilderness experiences untouched by the artificial and manufactured."
+    title: "Natureza",
+    description: "Promovemos o turismo de natureza com respeito ao meio ambiente e às comunidades locais."
   },
   {
     icon: Users,
-    title: "Community",
-    description: "Building connections between like-minded individuals who share a reverence for nature."
+    title: "Acessibilidade",
+    description: "Organizamos informações por distância, nível de trilha e necessidade de guia para todos os perfis de viajantes."
   },
   {
-    icon: TreePine,
-    title: "Mindfulness",
-    description: "Encouraging presence and awareness through the calming influence of natural surroundings."
+    icon: Camera,
+    title: "Inspiração",
+    description: "Mostramos a Paraíba através de imagens e descrições que inspiram novas viagens e aventuras."
   }
 ];
 
@@ -49,7 +49,7 @@ const About = () => {
       <div className="relative w-full h-[50vh] overflow-hidden">
         <motion.img
           src={bannerImage}
-          alt="Serene lake surrounded by nature"
+          alt="Paisagem paraibana"
           style={{ y }}
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -69,31 +69,31 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">About Us</span>
-              <h1 className="text-2xl md:text-3xl font-light tracking-tight mt-2 mb-8">Our Story</h1>
+              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Sobre Nós</span>
+              <h1 className="text-2xl md:text-3xl font-light tracking-tight mt-2 mb-8">Nossa História</h1>
               
               <div className="space-y-6 text-muted-foreground font-light leading-relaxed">
                 <p>
-                  Wild Haven was born from a simple observation: in our hyper-connected world, true rest has become 
-                  increasingly rare. We watched as screens replaced sunsets, notifications drowned out birdsong, 
-                  and the constant hum of digital life left people feeling more disconnected than ever.
+                  O Descubra Paraíba nasceu da vontade de reunir em um só lugar os destinos mais incríveis do estado. 
+                  Da costa litorânea ao sertão, das serras ao brejo, a Paraíba guarda paisagens e histórias que 
+                  merecem ser conhecidas por quem mora aqui e por quem visita.
                 </p>
                 <p>
-                  Founded in 2019, we set out to create spaces where people could step away from the noise and 
-                  rediscover what it means to be truly present. Our retreats aren't about escaping life—they're 
-                  about returning to it, in its most essential and beautiful form.
+                  Criamos esta plataforma para facilitar a descoberta de praias, trilhas, formações naturais, 
+                  patrimônios históricos e experiências culturais. Nosso objetivo é ajudar viajantes a planejar 
+                  roteiros com informações claras, filtros úteis e localização no mapa.
                 </p>
                 <p>
-                  Each of our locations has been carefully selected not just for its natural beauty, but for its 
-                  ability to facilitate genuine restoration. From ancient forests to pristine lakeshores, every 
-                  Wild Haven retreat offers a doorway back to the rhythms that sustained humanity for millennia.
+                  Cada ponto turístico cadastrado passa por uma curadoria que considera acessibilidade, 
+                  infraestrutura, nível de esforço e a importância cultural ou natural do lugar. Queremos que 
+                  a descoberta da Paraíba seja simples, inspiradora e segura.
                 </p>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Why Off-Grid Matters Section */}
+        {/* Why Paraíba Section */}
         <section className="py-24 lg:py-32 px-6 lg:px-12 bg-secondary/30">
           <div className="max-w-4xl mx-auto">
             <motion.div
@@ -102,30 +102,24 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">The Why</span>
-              <h2 className="text-2xl md:text-3xl font-light tracking-tight mt-2 mb-8">Why Off-Grid Retreats Matter</h2>
+              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">O Porquê</span>
+              <h2 className="text-2xl md:text-3xl font-light tracking-tight mt-2 mb-8">Por Que Conhecer a Paraíba?</h2>
               
               <div className="space-y-6 text-muted-foreground font-light leading-relaxed">
                 <p>
-                  The average person now spends over seven hours a day looking at screens. Our nervous systems, 
-                  evolved over millions of years in natural environments, are under constant assault from 
-                  artificial stimuli. The result? Epidemic levels of anxiety, burnout, and a pervasive sense 
-                  of disconnection.
+                  A Paraíba é um dos estados mais diversos do Nordeste brasileiro. Em poucos quilômetros, é possível 
+                  ir de praias de águas mornas a serras de clima ameno, de cânions do sertão a engenhos históricos 
+                  do agreste.
                 </p>
                 <p>
-                  Off-grid retreats offer something profound: the opportunity to reset. When we remove ourselves 
-                  from the digital matrix, remarkable things happen. Stress hormones drop. Sleep improves. 
-                  Creativity returns. We begin to hear our own thoughts again.
+                  Muitos desses lugares ainda são pouco explorados pelo turismo de massa, o que preserva sua 
+                  autenticidade. Ao mesmo tempo, falta uma centralização de informações práticas para quem quer 
+                  visitá-los com segurança e respeito.
                 </p>
                 <p>
-                  But it's not just about what we remove—it's about what we rediscover. The crackle of a fire. 
-                  The weight of silence. The slow unfurling of time when it's no longer sliced into notifications 
-                  and deadlines. These aren't luxuries; they're necessities that modern life has convinced us 
-                  we can live without.
-                </p>
-                <p>
-                  At Wild Haven, we believe that reconnecting with nature isn't an escape from reality—it's a 
-                  return to it. And in that return, we find not just rest, but renewal.
+                  No Descubra Paraíba, acreditamos que conhecer o estado é valorizar suas comunidades, 
+                  proteger sua natureza e celebrar sua cultura. E que cada viagem bem planejada começa com 
+                  informação de qualidade.
                 </p>
               </div>
             </motion.div>
@@ -142,8 +136,8 @@ const About = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">What We Stand For</span>
-              <h2 className="text-2xl md:text-3xl font-light tracking-tight mt-2">Our Values</h2>
+              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Nossos Princípios</span>
+              <h2 className="text-2xl md:text-3xl font-light tracking-tight mt-2">O Que Nos Guia</h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -33,6 +33,7 @@ interface AttractionFormProps {
   open: boolean;
   onClose: () => void;
   onSaved: () => void;
+  demo?: boolean;
 }
 
 export const AttractionForm = ({
@@ -40,6 +41,7 @@ export const AttractionForm = ({
   open,
   onClose,
   onSaved,
+  demo = false,
 }: AttractionFormProps) => {
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState({
@@ -63,6 +65,13 @@ export const AttractionForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (demo) {
+      toast.info("Modo demonstração: alterações não são salvas.");
+      onClose();
+      return;
+    }
+
     setSaving(true);
 
     const payload = {

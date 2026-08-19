@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Plus, Pencil, Trash2, LogOut, ArrowLeft, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,6 +23,8 @@ import { toast } from "sonner";
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isDemo = searchParams.get("demo") === "true";
   const { user, loading, signOut } = useAuth();
   const [attractions, setAttractions] = useState<Attraction[]>([]);
   const [fetching, setFetching] = useState(true);
@@ -30,13 +32,13 @@ const Admin = () => {
   const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!isDemo && !loading && !user) {
       navigate("/auth");
     }
-  }, [loading, user, navigate]);
+  }, [isDemo, loading, user, navigate]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!isDemo && !user) return;
 
     const fetchAttractions = async () => {
       const { data, error } = await supabase
@@ -53,10 +55,15 @@ const Admin = () => {
     };
 
     fetchAttractions();
-  }, [user]);
+  }, [isDemo, user]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Tem certeza que deseja excluir este ponto turístico?")) return;
+
+    if (isDemo) {
+      toast.info("Modo demonstração: exclusão não é salva.");
+      return;
+    }
 
     const { error } = await supabase.from("attractions").delete().eq("id", id);
     if (error) {
@@ -96,7 +103,7 @@ const Admin = () => {
     setFetching(false);
   };
 
-  if (loading || !user) {
+  if (!isDemo && (loading || !user)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-sm text-muted-foreground font-light">Carregando...</p>
@@ -126,15 +133,21 @@ const Admin = () => {
                 <ArrowLeft className="mr-2 h-3 w-3" />
                 Voltar
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={signOut}
-                className="text-[11px] uppercase tracking-wider font-normal text-destructive hover:text-destructive"
-              >
-                <LogOut className="mr-2 h-3 w-3" />
-                Sair
-              </Button>
+              {isDemo ? (
+                <Badge variant="outline" className="text-[11px] font-normal">
+                  Modo demonstração
+                </Badge>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={signOut}
+                  className="text-[11px] uppercase tracking-wider font-normal text-destructive hover:text-destructive"
+                >
+                  <LogOut className="mr-2 h-3 w-3" />
+                  Sair
+                </Button>
+              )}
             </div>
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -274,6 +287,7 @@ const Admin = () => {
         open={formOpen}
         onClose={closeForm}
         onSaved={handleSaved}
+        demo={isDemo}
       />
 
       <Footer />
