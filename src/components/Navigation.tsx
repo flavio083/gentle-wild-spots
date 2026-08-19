@@ -29,8 +29,8 @@ const Navigation = ({
 
   const navItems = [
     { label: "Descobrir", href: "/descobrir", isRoute: true },
-    { label: "Sobre", href: "/about", isRoute: true },
-    { label: "Contato", href: "/contact", isRoute: true },
+    { label: "Sobre", href: "/sobre", isRoute: true },
+    { label: "Contato", href: "mailto:contato@descubraparaiba.com", isRoute: false },
   ];
 
   const textColor = isMobileMenuOpen || isDark || !isScrolled ? "text-white" : "text-foreground";
