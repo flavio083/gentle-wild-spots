@@ -38,7 +38,7 @@ const Admin = () => {
   }, [isDemo, loading, user, navigate]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!isDemo && !user) return;
 
     const fetchAttractions = async () => {
       const { data, error } = await supabase
@@ -55,7 +55,7 @@ const Admin = () => {
     };
 
     fetchAttractions();
-  }, [user]);
+  }, [isDemo, user]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Tem certeza que deseja excluir este ponto turístico?")) return;
