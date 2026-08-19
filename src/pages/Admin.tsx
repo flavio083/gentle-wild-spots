@@ -23,6 +23,8 @@ import { toast } from "sonner";
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isDemo = searchParams.get("demo") === "true";
   const { user, loading, signOut } = useAuth();
   const [attractions, setAttractions] = useState<Attraction[]>([]);
   const [fetching, setFetching] = useState(true);
