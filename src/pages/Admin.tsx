@@ -98,7 +98,7 @@ const Admin = () => {
     setFetching(false);
   };
 
-  if (loading || !user) {
+  if (!isDemo && (loading || !user)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-sm text-muted-foreground font-light">Carregando...</p>
