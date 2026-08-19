@@ -128,15 +128,21 @@ const Admin = () => {
                 <ArrowLeft className="mr-2 h-3 w-3" />
                 Voltar
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={signOut}
-                className="text-[11px] uppercase tracking-wider font-normal text-destructive hover:text-destructive"
-              >
-                <LogOut className="mr-2 h-3 w-3" />
-                Sair
-              </Button>
+              {isDemo ? (
+                <Badge variant="outline" className="text-[11px] font-normal">
+                  Modo demonstração
+                </Badge>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={signOut}
+                  className="text-[11px] uppercase tracking-wider font-normal text-destructive hover:text-destructive"
+                >
+                  <LogOut className="mr-2 h-3 w-3" />
+                  Sair
+                </Button>
+              )}
             </div>
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
