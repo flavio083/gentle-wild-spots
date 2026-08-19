@@ -41,6 +41,7 @@ export const AttractionForm = ({
   open,
   onClose,
   onSaved,
+  demo = false,
 }: AttractionFormProps) => {
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState({
