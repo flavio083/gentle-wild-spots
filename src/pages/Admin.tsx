@@ -287,6 +287,7 @@ const Admin = () => {
         open={formOpen}
         onClose={closeForm}
         onSaved={handleSaved}
+        demo={isDemo}
       />
 
       <Footer />
