@@ -60,6 +60,11 @@ const Admin = () => {
   const handleDelete = async (id: string) => {
     if (!confirm("Tem certeza que deseja excluir este ponto turístico?")) return;
 
+    if (isDemo) {
+      toast.info("Modo demonstração: exclusão não é salva.");
+      return;
+    }
+
     const { error } = await supabase.from("attractions").delete().eq("id", id);
     if (error) {
       toast.error("Erro ao excluir");
