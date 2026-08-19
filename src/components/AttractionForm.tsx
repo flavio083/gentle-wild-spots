@@ -33,6 +33,7 @@ interface AttractionFormProps {
   open: boolean;
   onClose: () => void;
   onSaved: () => void;
+  demo?: boolean;
 }
 
 export const AttractionForm = ({
