@@ -32,10 +32,10 @@ const Admin = () => {
   const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!isDemo && !loading && !user) {
       navigate("/auth");
     }
-  }, [loading, user, navigate]);
+  }, [isDemo, loading, user, navigate]);
 
   useEffect(() => {
     if (!user) return;
