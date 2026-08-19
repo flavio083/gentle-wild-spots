@@ -65,6 +65,13 @@ export const AttractionForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (demo) {
+      toast.info("Modo demonstração: alterações não são salvas.");
+      onClose();
+      return;
+    }
+
     setSaving(true);
 
     const payload = {
