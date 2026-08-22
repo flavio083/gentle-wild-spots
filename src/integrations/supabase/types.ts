@@ -68,51 +68,6 @@ export type Database = {
         }
         Relationships: []
       }
-      bookings: {
-        Row: {
-          check_in: string
-          check_out: string
-          created_at: string
-          email: string
-          guest_name: string
-          guests: number
-          id: string
-          location_id: string
-          phone: string
-          postcode: string | null
-          status: Database["public"]["Enums"]["booking_status"]
-          updated_at: string
-        }
-        Insert: {
-          check_in: string
-          check_out: string
-          created_at?: string
-          email: string
-          guest_name: string
-          guests: number
-          id?: string
-          location_id: string
-          phone: string
-          postcode?: string | null
-          status?: Database["public"]["Enums"]["booking_status"]
-          updated_at?: string
-        }
-        Update: {
-          check_in?: string
-          check_out?: string
-          created_at?: string
-          email?: string
-          guest_name?: string
-          guests?: number
-          id?: string
-          location_id?: string
-          phone?: string
-          postcode?: string | null
-          status?: Database["public"]["Enums"]["booking_status"]
-          updated_at?: string
-        }
-        Relationships: []
-      }
       user_roles: {
         Row: {
           created_at: string
@@ -157,7 +112,6 @@ export type Database = {
         | "culture"
         | "natural_formation"
         | "heritage"
-      booking_status: "pending" | "confirmed" | "cancelled"
       guide_requirement: "not_required" | "recommended" | "required"
       trail_level: "none" | "easy" | "moderate" | "difficult"
     }
@@ -297,7 +251,6 @@ export const Constants = {
         "natural_formation",
         "heritage",
       ],
-      booking_status: ["pending", "confirmed", "cancelled"],
       guide_requirement: ["not_required", "recommended", "required"],
       trail_level: ["none", "easy", "moderate", "difficult"],
     },
