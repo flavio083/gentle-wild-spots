@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, TreePine } from "lucide-react";
+import { TreePine } from "lucide-react";
 import heroImage from "@/assets/hero-camping.jpg";
 import forestImage from "@/assets/spot-forest.jpg";
 import lakeImage from "@/assets/spot-lake.jpg";
