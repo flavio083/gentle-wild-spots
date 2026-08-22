@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, TreePine } from "lucide-react";
+import { TreePine } from "lucide-react";
 import heroImage from "@/assets/hero-camping.jpg";
 import forestImage from "@/assets/spot-forest.jpg";
 import lakeImage from "@/assets/spot-lake.jpg";
@@ -87,17 +87,6 @@ const Hero = () => {
           <span>to Reconnect</span>
         </motion.h1>
 
-        {/* CTA Button */}
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-          className="mt-6 flex items-center gap-3 bg-white text-foreground px-6 py-3 rounded-full text-sm tracking-wide hover:bg-white/90 transition-colors"
-        >
-          Book Now
-          <ArrowRight className="w-4 h-4" />
-        </motion.button>
       </div>
 
       {/* Progress Bars */}
